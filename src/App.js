@@ -1,23 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import { toDoList } from './data.js';
+import ListItem from './Components/ListItem/ListItem.jsx';
+import { useState } from "react";
+import Input from './Components/Input/Input.jsx';
+
 
 function App() {
+  const [last, setLast] = useState(false);
+
+  function handleClick(){
+    setLast(toDoList.length);
+    toDoList.push("I forgot one");
+    console.log(toDoList);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>To Do List Application </h1>
+      <div className = "Container">
+      
+        <Input handleClick = {handleClick}/>
+        {/* This is where we will take the input + text field */}
+        <ul>
+          {toDoList.map(function(item, index){
+            return <ListItem key = {index} text ={item} />;
+          })}
+          {last && <ListItem key = {last} text = {toDoList.at(last)}/>}
+        </ul>
+
+        
+      </div>
     </div>
   );
 }

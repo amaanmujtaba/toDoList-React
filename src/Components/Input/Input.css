@@ -1,0 +1,10 @@
+.input-div{
+    display: flex;
+    background-color: blue;
+    height : 50px;
+    align-items: center;
+}
+.add-button{
+    height: 100%;
+    aspect-ratio: 1/1;
+}
