@@ -1,0 +1,19 @@
+.input-div{
+    display: flex;
+    height : 50px;
+    align-items: center;
+}
+.add-button{
+    height: 100%;
+    aspect-ratio: 1/1;
+    background-color: rgb(156, 127, 184);
+    color: white;
+}
+.input-text{
+    height:100%;
+    width: 100%;
+    font-size: x-large;
+    background-color: rgb(35, 5, 64);
+    border: none;
+    color: whitesmoke;
+}

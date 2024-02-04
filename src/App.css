@@ -1,0 +1,26 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  text-align: center;
+  align-items: center;
+
+
+}
+
+p{
+  margin-left: 10px;
+  font-size: larger;
+}
+.Container{
+  display: flex;
+  width: 50%;
+  
+  flex-direction: column;
+  text-align: left;
+
+}
+
+ul{
+  list-style-type: none;
+}
