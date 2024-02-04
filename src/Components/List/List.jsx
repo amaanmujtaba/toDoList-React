@@ -1,4 +1,5 @@
 import { toDoList } from '../../data.js';
+import { completedList } from '../../data.js';
 import ListItem from '../ListItem/ListItem.jsx';
 import {useState} from "react";
 import "../Input/Input.css"
@@ -21,6 +22,25 @@ export default function List(){
         console.log(toDoList);
     }
 
+    function handleToggle(index, completed){
+        if(completed){
+            const task = completedList[index];
+           // setCompletedList((prev) => prev.filter((_, i) => i !== index));
+            completedList.splice(index,1);
+            //setToDoList((prev) => [...prev, task]);
+            toDoList.push(task);
+            setLast(toDoList.length);
+
+        }
+        else{
+            const task = toDoList[index];
+            toDoList.splice(index,1);
+            completedList.push(task);
+            setLast(toDoList.length);
+            console.log(toDoList)
+        }
+    }
+
 
 
     return(
@@ -31,7 +51,14 @@ export default function List(){
             </div>
             <ul>
                 {toDoList.map(function(item, index){
-                return <ListItem key = {index} text ={item} />;
+                return <ListItem key = {`todo-${index}`}  text ={item} onToggle = {()=>handleToggle(index, false)} />;
+            })}
+            </ul>
+            <ul>
+                {completedList.map(function(item, index){
+                return <ListItem key = {`completed-${index}`}  text ={item} completed
+                    onToggle = {()=>handleToggle(index, true)}
+                />;
             })}
             </ul>
         </>

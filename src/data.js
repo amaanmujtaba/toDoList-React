@@ -3,3 +3,9 @@ export const toDoList = [
     "Get a job",
     "Do leet-code"
 ];
+
+
+export const completedList = [
+    "eat food",
+    "play"
+]
