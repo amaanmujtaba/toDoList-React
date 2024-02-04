@@ -1,5 +1,5 @@
-import { toDoList } from '../../data.js';
-import { completedList } from '../../data.js';
+//import { toDoList } from '../../data.js';
+//import { completedList } from '../../data.js';
 import ListItem from '../ListItem/ListItem.jsx';
 import {useState} from "react";
 import "../Input/Input.css"
@@ -7,7 +7,8 @@ import "../Input/Input.css"
 
 export default function List(){
 
-
+    const [toDoList, setToDoList] = useState([]);
+    const[completedList, setCompletedList] = useState([]);
     const [newElement, setNewElement] = useState("");
     function handleChange(e){
         setNewElement(e.target.value);
@@ -16,29 +17,22 @@ export default function List(){
     const [last, setLast] = useState(ListItem.length);
 
     function handleClick(){
-        setLast(toDoList.length+1);
-        toDoList.push(newElement);
+        setToDoList((prevList)=> [newElement, ...prevList]);
         setNewElement("");
         console.log(toDoList);
     }
 
-    function handleToggle(index, completed){
-        if(completed){
-            const task = completedList[index];
-           // setCompletedList((prev) => prev.filter((_, i) => i !== index));
-            completedList.splice(index,1);
-            //setToDoList((prev) => [...prev, task]);
-            toDoList.push(task);
-            setLast(toDoList.length);
 
-        }
-        else{
+    function handleToggle(index, completed){
+        if (completed) {
+            const task = completedList[index];
+            setCompletedList((prev) => prev.filter((_, i) => i !== index));
+            setToDoList((prev) => [...prev, task]);
+          } else {
             const task = toDoList[index];
-            toDoList.splice(index,1);
-            completedList.push(task);
-            setLast(toDoList.length);
-            console.log(toDoList)
-        }
+            setToDoList((prev) => prev.filter((_, i) => i !== index));
+            setCompletedList((prev) => [...prev, task]);
+          }
     }
 
 
@@ -51,7 +45,8 @@ export default function List(){
             </div>
             <ul>
                 {toDoList.map(function(item, index){
-                return <ListItem key = {`todo-${index}`}  text ={item} onToggle = {()=>handleToggle(index, false)} />;
+                return <ListItem key = {`todo-${index}`}  text ={item} completed={false} 
+                onToggle = {()=>handleToggle(index, false)} />;
             })}
             </ul>
             <ul>
