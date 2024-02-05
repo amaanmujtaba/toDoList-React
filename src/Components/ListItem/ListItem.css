@@ -8,6 +8,7 @@
     height: 40px;
     align-items: center;
     margin-left: 10px;
+    justify-content: space-between;
 }
 
 .listItem{
@@ -19,7 +20,6 @@
 }
 
 .check-box{
-    background-color: blue;
     transform: scale(2);
 }
 
@@ -27,4 +27,10 @@
     text-decoration: line-through;
     text-decoration-thickness: 2px; /* Adjust the thickness of the line */
   text-decoration-color: rgba(239, 238, 238); /* Adjust the opacity of the line */
+}
+
+.delete-icon{
+    height: 100%;
+    aspect-ratio: 1/1;
+    background-color: azure;
 }

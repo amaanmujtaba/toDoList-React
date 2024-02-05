@@ -17,9 +17,11 @@ export default function List(){
     const [last, setLast] = useState(ListItem.length);
 
     function handleClick(){
-        setToDoList((prevList)=> [newElement, ...prevList]);
-        setNewElement("");
-        console.log(toDoList);
+        if(newElement!==""){
+            setToDoList((prevList)=> [newElement, ...prevList]);
+            setNewElement("");
+            console.log(toDoList);
+        }
     }
 
 
@@ -35,7 +37,17 @@ export default function List(){
           }
     }
 
+    function handleDelete(index, completed){
+        if(completed){
+            const task = completedList[index];
+            setCompletedList((prev) => prev.filter((_, i) => i !== index));
+        }
+        else{
+            const task = toDoList[index];
+            setToDoList((prev) => prev.filter((_, i) => i !== index));
+        }
 
+    }
 
     return(
         <>
@@ -46,13 +58,15 @@ export default function List(){
             <ul>
                 {toDoList.map(function(item, index){
                 return <ListItem key = {`todo-${index}`}  text ={item} completed={false} 
-                onToggle = {()=>handleToggle(index, false)} />;
+                onToggle = {()=>handleToggle(index, false)}
+                onDelete = {()=>handleDelete(index,false)} />;
             })}
             </ul>
             <ul>
                 {completedList.map(function(item, index){
                 return <ListItem key = {`completed-${index}`}  text ={item} completed
                     onToggle = {()=>handleToggle(index, true)}
+                    onDelete = {()=>handleDelete(index,true)}
                 />;
             })}
             </ul>
